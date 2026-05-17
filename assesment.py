@@ -161,31 +161,32 @@ def questionmakerminus():
                 print("Correct!")
                 break
 
-def mathtypecheck(question):
+def mathtypecheck(question,validmath=("m","1","mu","mul","mult","multi","multip","multipl","multiplic","multiplca","multiplicat","multiplicati","multiplicatio","multiplication","times","d","2","mu","div","divi","divis","divisi","divisio","division","divide","a","3","ad","add","addi","addit","additi","additio","addition","plus","s","4","su","sub","subt","subtr","subtra","subtrac","subtract","subtracti","subtractio","subtraction","minus")):
     # setup
-    error1 = "please enter a mathmatics type. (Multiplication, Division, Addition, Subtraction)"
-    to_check1 = input(question).lower()
+    error3 = "Please enter a mathmatics type. (Multiplication, Division, Addition, Subtraction)"
     while True:
-        # check if answer is valid
-        mathtype = 0
-        if usermath in multlist:
-            mathtype = 1
-            return mathtype
-        if usermath in divlist:
-            mathtype = 2
-            return mathtype
-        if usermath in addlist:
-            mathtype = 3
-            return mathtype
-        if usermath in sublist:
-            mathtype = 4
-            return mathtype
-        else: # error print if not recognized
-            print(error1)
+
+        # Get user response
+        to_check1 = input(question).lower()
+
+        for item in validmath:
+            # check if the user response in a word in the list
+            if item == to_check1:
+                return item
+
+            # check if the user response is valid
+            elif to_check1 == item[0]:
+                print()
+                print(error3)
+                return item
+
+        # print error
+        print(error3)
+        print()
 
 def mathquestiondecider():
     while True:
-        try:
+        try: # checks if there is a mathtype + uses def for the one chosen
             if mathtype == 1:
                 (questionmakertimes())
                 return mathtype
@@ -227,7 +228,7 @@ addlist = {"a","3","ad","add","addi","addit","additi","additio","addition","plus
 sublist = {"s","4","su","sub","subt","subtr","subtra","subtrac","subtract","subtracti","subtractio","subtraction","minus"}
 
 # asks for mathtype
-usermath = input("What kind of mathematics do you want to do? (Multiplication, Division, Addition, or subtraction)")
+usermath = mathtypecheck("What kind of mathematics do you want to do? (Multiplication, Division, Addition, or subtraction)")
 
 mathtype = 0
 if usermath in multlist:
