@@ -6,7 +6,7 @@ import random
 def instructions():
     # instructions
     makestat("Welcome to the Math quiz!")
-    makestat("You will have a number of guesses to answer the question correctly.")
+    makestat("You will have a number of attempts to answer the question correctly.")
     makestat("Good luck!")
 
 def intcheck(question):
@@ -59,9 +59,6 @@ def yncheck(question, validans=('yes', 'no',)):
         print()
 
 def questionmakertimes():
-    # sets guesses
-    guessnum = 3
-    currentguesses = guessnum
     # gens numbers
     number1 = random.randint(1, 100)
     number2 = random.randint(1, 12)
@@ -73,93 +70,78 @@ def questionmakertimes():
     answer = number1 * number2
     #loooooop
     while True:
-        if currentguesses == 1:
-            # if used all guesses, tell answer and break
-            print(f"You've used all of your guesses! the answer was {answer}!")
-            break
-        elif userans == answer:
+        if userans == answer:
             # if first and correct, print then break
-            print("First try!")
+            print("Correct!")
             break
         elif userans is not answer:
-            # if it is wrong, minus guesses, tell amount of guesses and reprompt question
-            currentguesses -=1
-            print(f"Incorrect! you have {currentguesses} guesses left.{userans},{answer}")
-            userans = intcheck(f"What is {number1} x {number2}?")
-            if userans == answer:
-                print("Correct!")
-                break
+            # if wrong, tell answer and break
+            print(f"Incorrect! the answer was {answer}!")
+            break
 
 def questionmakerdiv():
     # same as above, only minor changes
-    guessnum = 3
-    currentguesses = guessnum
+    # gens numbers
     number1 = random.randint(1, 100)
     number2 = random.randint(1, 12)
-    mathquestiondiv = f"What is {number1} divided by {number2}, rounded down?"
-    userans = intcheck(mathquestiondiv)
+    # question setup
+
+    # intcheck setup
+    userans = intcheck(f"What is {number1} divided by {number2}, rounded down?")
+    # ans setup
     answer = number1 // number2
+    # loooooop
     while True:
-        if currentguesses == 1:
-            print(f"You've used all of your guesses! the answer was {answer}!")
-            break
-        elif userans == answer:
+        if userans == answer:
+            # if first and correct, print then break
             print("Correct!")
             break
         elif userans is not answer:
-            currentguesses -=1
-            print(f"Incorrect! you have {currentguesses} guesses left.")
-            userans = intcheck(mathquestiondiv)
-            if userans == answer:
-                print("Correct!")
-                break
+            # if wrong, tell answer and break
+            print(f"Incorrect! the answer was {answer}!")
+            break
 
 def questionmakerplus():
-    guessnum = 3
-    currentguesses = guessnum
+    # gens numbers
     number1 = random.randint(1, 100)
     number2 = random.randint(1, 100)
-    mathquestionplus= f"What is {number1} plus {number2}?"
-    userans = intcheck(mathquestionplus)
+    # question setup
+
+    # intcheck setup
+    userans = intcheck(f"What is {number1} plus {number2}?")
+    # ans setup
     answer = number1 + number2
+    # loooooop
     while True:
-        if currentguesses == 1:
-            print(f"You've used all of your guesses! the answer was {answer}!")
-            break
-        elif userans == answer:
+        if userans == answer:
+            # if first and correct, print then break
             print("Correct!")
             break
         elif userans is not answer:
-            currentguesses -=1
-            print(f"Incorrect! you have {currentguesses} guesses left.")
-            userans = intcheck(mathquestionplus)
-            if userans == answer:
-                print("Correct!")
-                break
+            # if wrong, tell answer and break
+            print(f"Incorrect! the answer was {answer}!")
+            break
 
 def questionmakerminus():
-    guessnum = 3
-    currentguesses = guessnum
+    # gens numbers
     number1 = random.randint(1, 100)
     number2 = random.randint(1, 100)
-    mathquestionminus= f"What is {number1} minus {number2}?"
+    # question setup
 
-    userans = intcheck(mathquestionminus)
+    # intcheck setup
+    userans = intcheck(f"What is {number1} - {number2}?")
+    # ans setup
     answer = number1 - number2
+    # loooooop
     while True:
-        if currentguesses == 1:
-            print(f"You've used all of your guesses! the answer was {answer}!")
-            break
-        elif userans == answer:
+        if userans == answer:
+            # if first and correct, print then break
             print("Correct!")
             break
         elif userans is not answer:
-            currentguesses -=1
-            print(f"Incorrect! you have {currentguesses} guesses left.")
-            userans = intcheck(mathquestionminus)
-            if userans == answer:
-                print("Correct!")
-                break
+            # if wrong, tell answer and break
+            print(f"Incorrect! the answer was {answer}!")
+            break
 
 def mathtypecheck(question,validmath=("m","1","mu","mul","mult","multi","multip","multipl","multiplic","multiplca","multiplicat","multiplicati","multiplicatio","multiplication","times","d","2","mu","div","divi","divis","divisi","divisio","division","divide","a","3","ad","add","addi","addit","additi","additio","addition","plus","s","4","su","sub","subt","subtr","subtra","subtrac","subtract","subtracti","subtractio","subtraction","minus")):
     # setup
@@ -179,10 +161,6 @@ def mathtypecheck(question,validmath=("m","1","mu","mul","mult","multi","multip"
                 print()
                 print(error3)
                 return item
-
-        # print error
-        print(error3)
-        print()
 
 def mathquestiondecider():
     while True:
