@@ -1,7 +1,5 @@
 # imports
-import math
 import random
-
 # Definings
 def instructions():
     # instructions
@@ -58,7 +56,8 @@ def yncheck(question, validans=('yes', 'no',)):
         print(error)
         print()
 
-def questionmakertimes():
+def questionmakertimes(roundsright,roundswrong):
+
     # gens numbers
     number1 = random.randint(1, 100)
     number2 = random.randint(1, 12)
@@ -73,13 +72,15 @@ def questionmakertimes():
         if userans == answer:
             # if first and correct, print then break
             print("Correct!")
-            break
+            roundsright += 1
+            return roundsright
         elif userans is not answer:
             # if wrong, tell answer and break
             print(f"Incorrect! the answer was {answer}!")
-            break
+            roundswrong += 1
+            return roundswrong
 
-def questionmakerdiv():
+def questionmakerdiv(roundsright,roundswrong):
     # same as above, only minor changes
     # gens numbers
     number1 = random.randint(1, 100)
@@ -95,13 +96,15 @@ def questionmakerdiv():
         if userans == answer:
             # if first and correct, print then break
             print("Correct!")
-            break
+            roundsright += 1
+            return roundsright
         elif userans is not answer:
             # if wrong, tell answer and break
             print(f"Incorrect! the answer was {answer}!")
-            break
+            roundswrong += 1
+            return roundswrong
 
-def questionmakerplus():
+def questionmakerplus(roundsright,roundswrong):
     # gens numbers
     number1 = random.randint(1, 100)
     number2 = random.randint(1, 100)
@@ -116,13 +119,15 @@ def questionmakerplus():
         if userans == answer:
             # if first and correct, print then break
             print("Correct!")
-            break
+            roundsright += 1
+            return roundsright
         elif userans is not answer:
             # if wrong, tell answer and break
             print(f"Incorrect! the answer was {answer}!")
-            break
+            roundswrong += 1
+            return roundswrong
 
-def questionmakerminus():
+def questionmakerminus(roundsright,roundswrong):
     # gens numbers
     number1 = random.randint(1, 100)
     number2 = random.randint(1, 100)
@@ -137,11 +142,13 @@ def questionmakerminus():
         if userans == answer:
             # if first and correct, print then break
             print("Correct!")
-            break
+            roundsright += 1
+            return roundsright
         elif userans is not answer:
             # if wrong, tell answer and break
             print(f"Incorrect! the answer was {answer}!")
-            break
+            roundswrong += 1
+            return roundswrong
 
 def mathtypecheck(question,validmath=("m","1","mu","mul","mult","multi","multip","multipl","multiplic","multiplca","multiplicat","multiplicati","multiplicatio","multiplication","times","d","2","mu","div","divi","divis","divisi","divisio","division","divide","a","3","ad","add","addi","addit","additi","additio","addition","plus","s","4","su","sub","subt","subtr","subtra","subtrac","subtract","subtracti","subtractio","subtraction","minus")):
     # setup
@@ -166,25 +173,37 @@ def mathquestiondecider():
     while True:
         try: # checks if there is a mathtype + uses def for the one chosen
             if mathtype == 1:
-                (questionmakertimes())
+                (questionmakertimes(roundscorrect,roundsincorrect))
                 return mathtype
             if mathtype == 2:
-                (questionmakerdiv())
+                (questionmakerdiv(roundscorrect,roundsincorrect))
                 return mathtype
             if mathtype == 3:
-                (questionmakerplus())
+                (questionmakerplus(roundscorrect,roundsincorrect))
                 return mathtype
             if mathtype == 4:
-                (questionmakerminus())
+                (questionmakerminus(roundscorrect,roundsincorrect))
                 return mathtype
         except ValueError:
             print("error")
+
+def resultgiver(response, answer):
+    roundresult = "what"
+    if response == answer:
+        roundresult = "correct"
+    elif response is not answer:
+        roundresult = "incorrect"
+    else:
+        print("what")
+    return roundresult
 
 # loop setup
 mode = "regular"
 roundsplayed = 0
 usermath = 0
-
+gamehistory = []
+roundscorrect = 0
+roundsincorrect = 0
 # asks for instructions
 wantinstructions = yncheck("do you want to see the instructions? ")
 
@@ -238,3 +257,30 @@ while roundsplayed < numrounds:
     # adds roundcount to inf mode
     if mode == "infinite":
         numrounds += 1
+
+    historyitem = (f"Round: {roundsplayed}"
+                   f" - Amount of right answers: {roundscorrect}"
+                   f" - Amount of wrong answers: {roundsincorrect}")
+    gamehistory.append(historyitem)
+
+if roundsplayed > 0:
+    # calculate stats
+    percentright = roundscorrect / roundsplayed * 100
+    percentwrong = roundsincorrect / roundsplayed * 100
+
+    # output game stats
+    print("Game Stats")
+    print(f"Correct: {percentright: .2f} \t "
+          f"Wrong: {percentwrong:.2f} \t ")
+
+    # Ask user if they want to see their game history
+    seehistory = yncheck("\nDo you want to see your Game History? ")
+    if seehistory == "yes":
+        for item in gamehistory:
+            print(item)
+
+    print()
+    makestat("Thanks for playing")
+
+else:
+    makestat("Game Exited")
