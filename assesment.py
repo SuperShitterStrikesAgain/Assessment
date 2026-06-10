@@ -225,6 +225,7 @@ def mathtypecheck(question,validmath=("m","1","mu","mul","mult","multi","multip"
 
 def mathquestiondecider():
     global roundscorrect, roundsincorrect
+    global question1, answer
     while True:
         try: # checks if there is a mathtype + uses def for the one chosen
             if mathtype == 1:
@@ -237,6 +238,7 @@ def mathquestiondecider():
                 userans = intcheck(f"What is {number1} x {number2}?")
                 # ans setup
                 answer = number1 * number2
+                question1 = f"{number1} x {number2}"
                 # loooooop
                 while True:
                     if userans == "xxx":
@@ -265,6 +267,7 @@ def mathquestiondecider():
                 userans = intcheck(f"What is {number1} divided by {number2}, rounded down?")
                 # ans setup
                 answer = math.ceil(number1 / number2)
+                question1 = f"{number1} divided by {number2}"
                 # loooooop
                 while True:
                     if userans == "xxx":
@@ -292,6 +295,7 @@ def mathquestiondecider():
                 userans = intcheck(f"What is {number1} plus {number2}?")
                 # ans setup
                 answer = number1 + number2
+                question1 = f"{number1} plus {number2}"
                 # loooooop
                 while True:
                     if userans == "xxx":
@@ -319,6 +323,7 @@ def mathquestiondecider():
                 userans = minusintcheck(f"What is {number1} - {number2}?")
                 # ans setup
                 answer = number1 - number2
+                question1 = f"{number1} - {number2}"
                 # loooooop
                 while True:
                     if userans == "xxx":
@@ -337,7 +342,7 @@ def mathquestiondecider():
                         return roundsincorrect
         except ValueError:
             print("error")
-
+global question1, answer
 # loop setup
 
 mode = "regular"
@@ -422,7 +427,11 @@ while roundsplayed < int(numrounds):
         numrounds += 1
     #history storage
     historyitem = (f"Round: {roundsplayed}"
+                   ""
+                   f" - Question for round: {question1}"
+                   ""
                    f" - Amount of right answers (Accumulative): {roundscorrect}"
+                   ""
                    f" - Amount of wrong answers (Accumulative): {roundsincorrect}")
 
     gamehistory.append(historyitem)
