@@ -420,10 +420,10 @@ while roundsplayed < int(numrounds):
 
     if mode == "infinite":
         numrounds += 1
-
+    #history storage
     historyitem = (f"Round: {roundsplayed}"
-                   f" - Amount of right answers: {roundscorrect}"
-                   f" - Amount of wrong answers: {roundsincorrect}")
+                   f" - Amount of right answers (Accumulative): {roundscorrect}"
+                   f" - Amount of wrong answers (Accumulative): {roundsincorrect}")
 
     gamehistory.append(historyitem)
 
@@ -449,6 +449,11 @@ if roundsplayed > 0:
 
     print()
     makestat("Thanks for playing")
+
+if roundsplayed == 0:
+    print("You have exited the game on the first question. There is no statistics to show.")
+
+
 else:
     percentright = roundscorrect / roundsplayed * 100
     percentwrong = roundsincorrect / roundsplayed * 100
