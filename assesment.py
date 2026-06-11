@@ -451,7 +451,7 @@ if roundsplayed > 0:
 
     # Ask user if they want to see their game history
 
-    seehistory = yncheck("\nDo you want to see your Game History? ")
+    seehistory = yncheck("\Do you want to see your Game History? ")
     if seehistory == "yes":
         for item in gamehistory:
             print(item)
@@ -459,25 +459,5 @@ if roundsplayed > 0:
     print()
     makestat("Thanks for playing")
 
-if roundsplayed == 0:
+if roundsplayed == 0 and roundscorrect == 0 and roundsincorrect == 0:
     print("You have exited the game on the first question. There is no statistics to show.")
-
-
-else:
-    percentright = roundscorrect / roundsplayed * 100
-    percentwrong = roundsincorrect / roundsplayed * 100
-
-    # output game stats
-
-    print("Game Stats")
-    print(f"Correct: {percentright: .2f} \t "
-          f"Wrong: {percentwrong:.2f} \t ")
-
-    # Ask user if they want to see their game history
-
-    seehistory = yncheck("\nDo you want to see your Game History? ")
-    if seehistory == "yes":
-        for item in gamehistory:
-            print(item)
-
-    makestat("Game Exited")
